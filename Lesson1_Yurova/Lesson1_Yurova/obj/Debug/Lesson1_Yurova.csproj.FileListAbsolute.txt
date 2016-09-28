@@ -1,0 +1,6 @@
+D:\Marina\Documents\Univercity Life\4 course\ИИ\Lesson1_Yurova\Lesson1_Yurova\bin\Debug\Lesson1_Yurova.exe.config
+D:\Marina\Documents\Univercity Life\4 course\ИИ\Lesson1_Yurova\Lesson1_Yurova\bin\Debug\Lesson1_Yurova.exe
+D:\Marina\Documents\Univercity Life\4 course\ИИ\Lesson1_Yurova\Lesson1_Yurova\bin\Debug\Lesson1_Yurova.pdb
+D:\Marina\Documents\Univercity Life\4 course\ИИ\Lesson1_Yurova\Lesson1_Yurova\obj\Debug\Lesson1_Yurova.csprojResolveAssemblyReference.cache
+D:\Marina\Documents\Univercity Life\4 course\ИИ\Lesson1_Yurova\Lesson1_Yurova\obj\Debug\Lesson1_Yurova.exe
+D:\Marina\Documents\Univercity Life\4 course\ИИ\Lesson1_Yurova\Lesson1_Yurova\obj\Debug\Lesson1_Yurova.pdb

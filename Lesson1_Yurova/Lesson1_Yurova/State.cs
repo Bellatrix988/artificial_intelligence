@@ -8,7 +8,7 @@ namespace Lesson1_Yurova
 {
    public class State<T>
     {
-        public T Value { get; }
+        public  Value { get; }
         public State<T> Parent;
         public string Operation;
 

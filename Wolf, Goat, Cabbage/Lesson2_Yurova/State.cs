@@ -7,7 +7,9 @@ using static Lesson2_Yurova.FoundSolution;
 
 namespace Lesson2_Yurova
 {
-
+/// <summary>
+/// Состояние в дереве
+/// </summary>
     public class State
     {
         public List<FoundSolution.Item> right { get; set; }
@@ -21,6 +23,14 @@ namespace Lesson2_Yurova
             this.boat = bNew;
             this.right = rNew;
             this.Parent = p;
+        }
+
+        internal State()
+        {
+            this.left = new List<Item>();
+            this.right = new List<Item>();
+            this.Parent = null;
+            this.boat = Item.Nothing;
         }
 
         internal State(State s) 
@@ -40,6 +50,8 @@ namespace Lesson2_Yurova
                 return false;
             return (new HashSet<Item>(st.right).SetEquals(this.right)) && (new HashSet<Item>(st.left).SetEquals(this.left)) && (st.boat == this.boat) ; // && (st.Parent != this.Parent);
         }
+
+        //функция печати узла
         internal String Print()
         {
             StringBuilder str = new StringBuilder(" #[ ");

@@ -14,15 +14,17 @@ namespace Lesson2_Yurova
         {
             List<Item> resultState = new List<Item> { Item.Wolf, Item.Goat, Item.Cabbage };
 
-            State first = new State(resultState, Item.Nothing, new List<Item>(), null);
-            State second = new State(resultState, Item.Nothing, new List<Item>(), first);
+            State StartState = new State(resultState, Item.Nothing, new List<Item>(), null);
+            State GoalState = new State(new List<Item>(), Item.Nothing, resultState, null);
+            State second = new State(resultState, Item.Nothing, new List<Item>(), StartState);
 
             List<Item> te = new List<Item> { Item.Wolf, Item.Goat, Item.Cabbage };
 
             var main = new FoundSolution();
-            //main.StartFound(first);
-            Console.WriteLine(main.StartFound(first));
-            Console.WriteLine(main.StartFoundDFS(first));
+            Console.WriteLine("BFS: \n{0}", main.BFS(StartState, GoalState));
+            Console.WriteLine("DFS: \n{0}",main.DFS(StartState, GoalState));
+
+
         }
     }
 }

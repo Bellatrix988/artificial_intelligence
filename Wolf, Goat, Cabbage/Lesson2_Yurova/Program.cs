@@ -8,8 +8,10 @@ using static Lesson2_Yurova.FoundSolution;
 namespace Lesson2_Yurova
 {
 
+
     class Program
     {
+
         static void Main(string[] args)
         {
             List<Item> resultState = new List<Item> { Item.Wolf, Item.Goat, Item.Cabbage };
@@ -22,8 +24,8 @@ namespace Lesson2_Yurova
 
             var main = new FoundSolution();
             Console.WriteLine("BFS: \n{0}", main.BFS(StartState, GoalState));
-            Console.WriteLine("DFS: \n{0}",main.DFS(StartState, GoalState));
-
+            Console.WriteLine("DFS: \n{0}", main.DFS(StartState, GoalState));
+            Console.WriteLine("IDS: \n{0}", main.IDS(StartState, GoalState));
 
         }
     }

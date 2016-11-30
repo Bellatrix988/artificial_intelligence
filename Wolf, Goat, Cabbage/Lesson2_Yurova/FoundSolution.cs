@@ -9,10 +9,12 @@ namespace Lesson2_Yurova
     public class FoundSolution
     {
         //Волк, коза, капуста и никто
-        public enum Item { Wolf, Goat, Cabbage, Nothing};
-       
+        public enum Item { Wolf, Goat, Cabbage, Nothing };
+        private Stack<State> _dfsTree = new Stack<State>();
+        private Queue<State> _tree = new Queue<State>();
         int countOper = 0;
         int maxStep = 100000;
+
 
         /// <summary>
         /// проверка на то, можно ли объектам оставаться вместе        
@@ -31,9 +33,9 @@ namespace Lesson2_Yurova
             foreach (Item animal in vec)
             {
                 if ((curr == Item.Wolf && animal == Item.Goat) || (curr == Item.Goat && animal == Item.Cabbage) || (animal == Item.Goat && curr == Item.Cabbage) || (curr == Item.Goat && animal == Item.Wolf))
-                    res =  true;
+                    res = true;
                 if ((curr == Item.Wolf && animal == Item.Cabbage) || (curr == Item.Cabbage && animal == Item.Wolf))
-                    res =  false;
+                    res = false;
                 curr = animal;
 
             }
@@ -51,7 +53,6 @@ namespace Lesson2_Yurova
             while (current.Parent != null)
             {
                 strResult.AppendFormat("{0} ", current.Print());
-                //countOper++;
                 current = current.Parent;
             }
             strResult.AppendFormat("{0}", current.Print());
@@ -68,7 +69,7 @@ namespace Lesson2_Yurova
                 return queueState;// continue;
             else
             {
-                if(current.boat != Item.Nothing)
+                if (current.boat != Item.Nothing)
                 {
                     var rightSide = new List<Item>(current.right);
                     rightSide.Add(current.boat);
@@ -126,7 +127,7 @@ namespace Lesson2_Yurova
                 ///получаем потомков
                 var ChildCurrent = _BuildChild(current, listState);
 
-                foreach(var child in ChildCurrent)
+                foreach (var child in ChildCurrent)
                     if (!listState.Contains(child))
                     {
                         queueState.Enqueue(child);
@@ -145,6 +146,7 @@ namespace Lesson2_Yurova
             var strResult = new StringBuilder("\n"); // строка результата
             var q = new Stack<State>();
             q.Push(StartNode);
+            _dfsTree.Push(StartNode);
             var current = _DFS(q, new List<State>(q), GoalState);
             while (current.Parent != null)
             {
@@ -152,6 +154,9 @@ namespace Lesson2_Yurova
                 current = current.Parent;
             }
             strResult.AppendFormat("{0}", current.Print());
+            //strResult.AppendFormat("\nTREE\n");
+            //foreach (var s in _dfsTree)
+            //    strResult.AppendFormat("{0}", s.Print());
             return strResult.ToString();
         }
 
@@ -172,6 +177,8 @@ namespace Lesson2_Yurova
                     if (!listState.Contains(child))
                     {
                         queueState.Push(child);
+                        _dfsTree.Push(child);
+                        _tree.Enqueue(child);
                         listState.Add(child);
                     }
             }
@@ -182,9 +189,56 @@ namespace Lesson2_Yurova
 
         #region IDDFS
 
-        public void DLS()
-        {
 
+        private bool isGoal(State st)
+        {
+            return st.Equals(new State(new List<Item>(), Item.Nothing, new List<Item> { Item.Wolf, Item.Goat, Item.Cabbage }, null));
+        }
+
+        public string IDS(State StartNode, State GoalState)
+        {
+            var strResult = new StringBuilder("\n");        // строка результата
+            var q = new Stack<State>();
+            q.Push(StartNode);
+            State current = new State();
+            var depth = -1;
+            while (current.Equals(new State()))
+            {
+                depth++;
+                StartNode = _tree.Dequeue();
+                current = _IDS(depth, StartNode, new List<State>(q));
+            }
+            strResult.AppendFormat("DEPTH: {0}\n", depth.ToString());
+            while (current.Parent != null)
+            {
+                strResult.AppendFormat("{0} ", current.Print());
+                current = current.Parent;
+            }
+            strResult.AppendFormat("{0}", current.Print());
+            return strResult.ToString();
+        }
+
+        public State _IDS(int depth, State current, List<State> listState)
+        {
+            if (isGoal(current))
+                return current;
+
+            //List<State> listState = new List<State>();
+            //listState.Add(current);
+            //Stack<State> st = new Stack<State>();
+
+            ///получаем потомков
+            //var ChildCurrent = _BuildChild(current, listState);
+
+            //foreach (var child in ChildCurrent)
+            //    if (!listState.Contains(child) && !child.Equals(new State()))
+            //    {
+            //        st.Push(child);
+            //        listState.Add(child);
+            //        return _IDS(depth + 1, child, listState);
+            //       //ChildCurrent.Enqueue(_IDS(depth + 1, child, listState));
+            //    }
+            return new State();
         }
 
         #endregion
